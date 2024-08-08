@@ -1,0 +1,16 @@
+.Home {
+    width: 100%;
+  }
+  
+  .Home img {
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove any default image spacing */
+    margin-bottom: 20px; /* Add some space below the image */
+    overflow: hidden;
+  }
+  
+  .Home h1 {
+    font-size: 24px; /* Adjust the font size as needed */
+    margin-bottom: 20px; /* Add some space below the heading */
+  }

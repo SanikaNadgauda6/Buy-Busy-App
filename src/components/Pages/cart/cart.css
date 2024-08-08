@@ -1,0 +1,200 @@
+/* Cart page container */
+.cart-page {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+/* Cart table container */
+.cart-table-container .cart-table {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  padding: 80px;
+  border: 2px solid black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.235); 
+  width: 90%;
+}
+.cart-table-container{
+  /* background-color: #0ccf98; */
+  width: 60%;
+}
+
+/* Table header */
+.cart-table thead {
+  background-color: #dedede;
+  
+}
+
+/* Table header row */
+.cart-table th {
+  padding: 15px 10px;
+  text-align: left;
+}
+
+/* Table body */
+.cart-table tbody {
+  background-color: #fff;
+  text-align: left;
+
+}
+
+/* Table body row */
+.cart-table tr {
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Table body cell */
+.cart-table td {
+  padding: 15px;
+  vertical-align: middle;
+
+}
+
+/* Product image */
+.cart-table .product-image {
+  width: 100px;
+  height: auto;
+}
+
+/* Product name */
+.cart-table .product-name {
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  align-items: center;
+}
+
+/* Product price */
+.cart-table .product-price {
+  font-size: 14px;
+  color: black;
+  display: flex;
+  align-items: center
+}
+
+/* Quantity container */
+.cart-table .quantity {
+  display: flex;
+  align-items: center;
+}
+
+/* Quantity buttons */
+.cart-table .quantity button {
+  border: 1px solid black;
+  color: black;
+  padding: 3px 8px;
+  border-radius: 60%;
+  margin: 0 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center
+}
+
+/* Total price */
+.cart-table .total-price {
+  font-weight: bold;
+  display: flex;
+  align-items: center
+}
+
+/* Remove button */
+.cart-table .remove-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.235);
+}
+.cart-table .remove-btnC{
+  display: flex;
+  align-items: center
+}
+
+/* Checkout section */
+.checkout-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 50px; */
+}
+
+/* Total text */
+.total-text, .total-price_C {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Checkout button */
+.checkout-btn {
+  background-color: #28a745;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Hover effect for buttons */
+.cart-table .quantity button:hover,
+.cart-table .remove-btn:hover,
+.checkout-btn:hover {
+  opacity: 0.8;
+}
+
+
+
+
+
+
+/* summary */
+.Summary{
+  width: 40%;
+  /* background-color: #4CAF50; */
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column
+}
+.summary-table {
+  border-collapse: collapse;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #000;
+  /* background-color: #dc3545; */
+  width: 70%;
+}
+
+.summary-heading {
+  background-color: #f2f2f2;
+  padding: 10px 0px;
+  border-radius: 10px 10px 0 0;
+
+}
+
+.summary-item, .summary-value {
+  border: 1px solid #757575;
+  padding: 15px;
+  text-align: left;
+}
+
+.checkout-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkout-button:hover {
+  background-color: #45a049;
+}
+.checkout-container {
+  text-align: center;
+  margin-top: 20px; /* Adjust as needed */
+}

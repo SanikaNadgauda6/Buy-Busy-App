@@ -1,0 +1,58 @@
+/* Orders page container */
+.orders-page {
+  padding: 20px;
+}
+
+/* Order confirmation container */
+.order-confirmation {
+  margin-bottom: 20px;
+}
+
+/* Ordered items list */
+.ordered-items-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Ordered item */
+.ordered-item {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+}
+
+/* Ordered item image container */
+.ordered-item-image-container {
+  margin-right: 20px;
+}
+
+/* Ordered item image */
+.ordered-item-image {
+  width: 100px;
+  height: auto;
+}
+
+/* Ordered item details */
+.ordered-item-details {
+  flex: 1;
+}
+
+/* Ordered item name */
+.ordered-item-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Ordered item price */
+.ordered-item-price {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Ordered item quantity */
+.ordered-item-quantity {
+  font-size: 16px;
+}
