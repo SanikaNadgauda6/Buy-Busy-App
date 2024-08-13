@@ -7,7 +7,6 @@ export const initializeFirestoreDataIfNeeded = async () => {
     const collectionRef = collection(db, 'products');
     const querySnapshot = await getDocs(collectionRef);
     if (querySnapshot.empty) {
-      // console.log("Initializing Firestore data...");
       await Promise.all(items.map(async item => {
         await setDoc(doc(collection(db, "products")), {
           id: item.id,

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { LoginContext } from "../../../context";
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStore } from '@fortawesome/free-solid-svg-icons'; // Import the desired icon
+import { faStore } from '@fortawesome/free-solid-svg-icons'; // Import the icon
 
 
 export const Navbar = () => {

@@ -73,7 +73,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 30px;
   margin-left: 50px;
   margin-right: 50px;
 }
@@ -82,10 +82,14 @@
   font-family:"Merienda", cursive;
 }
 .product-card {
-  background-color: aliceblue;
+  background-color: #efefff;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+.product-card:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 .product-image {
@@ -110,9 +114,10 @@
 
 /* Assuming your button has a class named "add-to-cart-button" */
 .add-to-cart-button {
-  background-color: #4CAF50; 
+  background-color: #e0e0f5; 
   border: none;
-  color: white;
+  color: #1d1f50;
+  border: 1px solid #1d1f50;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -121,4 +126,8 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
+}
+.add-to-cart-button:hover{
+  background-color: #1d1f50;
+  color: #fbcd15;
 }

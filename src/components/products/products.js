@@ -45,7 +45,7 @@ const Products = () => {
             <img className="product-image" src={item.image} alt={item.name} />
             <div className="product-info">
               <p className="product-name">{item.name}</p>
-              <p className="product-price">{item.price}</p>
+              <p className="product-price"> ₹ {item.price}</p>
             </div>
             <button className='add-to-cart-button' onClick={()=> handleAddtoCart(item)}> Add to Cart</button>
           </div>

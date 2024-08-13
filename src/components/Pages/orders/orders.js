@@ -1,63 +1,84 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../../context';
-import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebaseInit';
-import './orders.css';
-
+import { collection, getDocs } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import "./orders.css";
 
 export const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const auth = getAuth();
 
+  const fetchOrders = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
 
+    try {
+      const userOrdersCollection = collection(db, 'users', user.uid, 'orders');
+      const querySnapshot = await getDocs(userOrdersCollection);
+      // const fetchedOrders = querySnapshot.docs.map(doc => doc.data());
 
+      const fetchedOrders = querySnapshot.docs.map(doc => {
+        const data = doc.data();
+        return { id: doc.id, ...data };
+      });
 
-  const [orderedItems, setOrderedItems] = useState([]);
+      setOrders(fetchedOrders);
+      console.log("All ordered items",orders);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchOrderedItems = async () => {
-      try {
-        const ordersCollection = collection(db, 'orders');
-        const querySnapshot = await getDocs(ordersCollection);
-        // console.log('Fetched query snapshot:', querySnapshot.docs);
-        const fetchedOrderedItems = querySnapshot.docs.map((doc) => doc.data());
-        console.log('Fetched ordered items:', fetchedOrderedItems);
-        setOrderedItems(fetchedOrderedItems);
-      } catch (error) {
-        console.error('Error fetching ordered items:', error);
-      }
-    };
-    fetchOrderedItems();
-  }, []); 
+    fetchOrders();
+  }, []);
 
-  console.log('Ordered items:', orderedItems);
-  return (
-    <div className="orders-page">
-      {/* {orderedItems.length > 0 ? (
-        {orderedItems.
-
-        ))}
-      ): (
-        <h2>No Orders Yet!</h2>
-      )}       */}
-
-
-<div>
-  <h2>Recent Orders</h2>
-  <div className="order-list">
-    {orderedItems.map((order, index) => (
-        <div key={index} className="order-item">
-          {/* Display order details */}
-          <p>Order ID: {order.orderId}</p>
-          <p>Total Amount: {order.totalAmount}</p>
-          <p>Order Date: {new Date(order.timestamp).toLocaleString()}</p>
-          {/* You can add more details here */}
-        </div>
-      ))}
-  </div>
-</div>
-
-    </div>
-  );
-  
+  const formatTimestamp = (timestamp) => {
+  if (!timestamp || !timestamp.seconds) return 'N/A'; 
+  return new Date(timestamp.seconds * 1000).toLocaleString(); 
 };
 
-export default Orders;
+
+  return (
+    <div className="orders-page">
+      <h2>Recent Orders</h2>
+      {orders.length > 0 ? (
+        <div className="orders-table-container">
+          <table className="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Items</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{formatTimestamp(order.timestamp)}</td>
+                  <td>
+                    <ul className="order-items-list">
+                      {order.items.map((item, idx) => (
+                        <li key={idx} className="order-item-details">
+                          <img src={item.image} alt={item.name} className="order-item-image" />
+                          <div className="item-details">
+                            <p><strong>Item Name:</strong> {item.name}</p>
+                            <p><strong>Quantity:</strong> {item.quantity}</p>
+                            <p><strong>Price:</strong> ${item.price}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p>No orders found.</p>
+      )}
+    </div>
+  );
+}

@@ -36,10 +36,10 @@ const Auth = () => {
     const handleSignOut = async () => {
       try {
         await signOut(auth);
-        console.log("is loggedin before setting it",isLoggedIn);
+        console.log("is loggedin before setting it", isLoggedIn);
         setIsLoggedIn(false);
-        console.log("is loggedin after setting it",isLoggedIn);
-        navigate('/Sign-in-Signup'); // Redirect to sign-in/register page after sign-out
+        console.log("is loggedin after setting it", isLoggedIn);
+        navigate('/Sign-in-Signup');
         console.log('User signed out successfully!');
       } catch (error) {
         console.error('Error signing out:', error.message);
@@ -58,7 +58,7 @@ const Auth = () => {
                         <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         <button onClick={handleSignUp}>Sign Up</button>
                         <button onClick={handleSignIn}>Sign In</button>
-                        {isLoggedIn ? (<Navigate to="/" />): null}
+                        {isLoggedIn ? (<Navigate to= "/" />): null}
                         </>
                     )}
                 {error && <p>{error}</p>}

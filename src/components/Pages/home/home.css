@@ -1,16 +1,29 @@
-.Home {
-    width: 100%;
-  }
-  
-  .Home img {
-    max-width: 100%; /* Ensure the image doesn't exceed its container */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Remove any default image spacing */
-    margin-bottom: 20px; /* Add some space below the image */
-    overflow: hidden;
-  }
-  
-  .Home h1 {
-    font-size: 24px; /* Adjust the font size as needed */
-    margin-bottom: 20px; /* Add some space below the heading */
-  }
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
+
+.Home .banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  /* background: linear-gradient(135deg, #fbcd15 20%, #118791 50%, #1d1f50 80%); */
+  background-color: #1d1f50;
+}
+
+.Home .banner .text {
+  flex: 1;
+  padding: 0px 50px;
+  text-align: left !important;
+  color: white;
+  line-height: 1.7;
+  font-size: 18px;
+}
+
+.Home .banner .text h1{
+  color: #fbcd15;
+  font-family: "Merienda", cursive;
+}
+
+.Home .banner .img img {
+  max-width: 100%;
+  height: auto;
+}

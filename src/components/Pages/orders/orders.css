@@ -1,58 +1,100 @@
-/* Orders page container */
+/* Orders Page Container */
 .orders-page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  /* Light grey background for the entire page */
+}
+
+/* Heading */
+.orders-page h2 {
+  color: #1d1f50;
+  /* Navy blue text */
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Orders Table Container */
+.orders-table-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-/* Order confirmation container */
-.order-confirmation {
-  margin-bottom: 20px;
+/* Orders Table */
+.orders-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #1d1f50;
+  /* Navy blue border */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  /* White background */
 }
 
-/* Ordered items list */
-.ordered-items-list {
+/* Table Header */
+.orders-table thead {
+  color: #fbcd15;
+  background-color: #1d1f50;
+}
+
+.orders-table th {
+  padding: 12px;
+  text-align: left;
+  font-size: 16px;
+}
+
+
+.orders-table tbody {
+  background-color: #ffffff;
+}
+
+/* Table Rows */
+.orders-table tr {
+  border-bottom: 1px solid #000000;
+}
+
+/* Table Cells */
+.orders-table td {
+  padding: 15px;
+  vertical-align: top;
+  color: #1d1f50;
+  text-align: left;
+  font-size: 15px;
+}
+/* Order Item Details */
+.order-items-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
-/* Ordered item */
-.ordered-item {
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
+.order-item-details {
   display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
 
-/* Ordered item image container */
-.ordered-item-image-container {
-  margin-right: 20px;
+.item-details {
+  margin-left: 35px;
+  text-align: left;
+  color: #1d1f50;
 }
 
-/* Ordered item image */
-.ordered-item-image {
-  width: 100px;
+.item-details p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.order-item-image {
+  width: 80px;
   height: auto;
-}
-
-/* Ordered item details */
-.ordered-item-details {
-  flex: 1;
-}
-
-/* Ordered item name */
-.ordered-item-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-/* Ordered item price */
-.ordered-item-price {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-/* Ordered item quantity */
-.ordered-item-quantity {
-  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
