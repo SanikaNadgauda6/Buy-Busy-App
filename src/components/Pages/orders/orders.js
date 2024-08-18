@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from '../../../firebaseInit';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -31,7 +31,7 @@ export const Orders = () => {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [fetchOrders]);
 
   const formatTimestamp = (timestamp) => {
   if (!timestamp || !timestamp.seconds) return 'N/A'; 

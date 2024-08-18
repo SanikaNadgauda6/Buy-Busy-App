@@ -8,7 +8,7 @@ import { CartContext, LoginContext } from '../../context';
 const Products = () => {
   const [items, setItems] = useState([]);
   const { cart } = useContext(CartContext);
-  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn } = useContext(LoginContext);
 
   useEffect(() => {
   console.log("Initializing Products component...");

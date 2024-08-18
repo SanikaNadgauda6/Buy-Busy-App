@@ -14,7 +14,7 @@ const Auth = () => {
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
     const [error, setError] = useState(null); 
-    const user = getAuth().currentUser;
+    // const user = getAuth().currentUser;
 
     const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
     const navigate = useNavigate();    

@@ -2,7 +2,7 @@
 import 'firebase/analytics';
 import 'firebase/firestore';
 import { getFirestore, collection  } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth'; // Import the 'getAuth' function from the 'firebase/auth' module
+// import { getAuth } from 'firebase/auth';
 
 
 import { initializeApp } from "firebase/app";
@@ -23,7 +23,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
-const auth = getAuth(app); 
+// const auth = getAuth(app);
 const db = getFirestore(app);
 
 
