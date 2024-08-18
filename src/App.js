@@ -6,9 +6,17 @@ import { Home } from './components/Pages/home/home';
 import Auth from './components/auth/auth';
 import { Cart } from './components/Pages/cart/cart';
 import { Orders } from './components/Pages/orders/orders';
+import { initializeFirestoreDataIfNeeded } from './components/Pages/storingdata';
+import { useEffect } from 'react';
+
 
 
 export default function App() {
+
+  useEffect(() => {
+    initializeFirestoreDataIfNeeded();
+  }, []);
+
 
   return (
     <div className="App">

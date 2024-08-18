@@ -3,31 +3,35 @@ import { db } from '../../firebaseInit';
 
 import { onSnapshot, collection } from 'firebase/firestore';
 import "./product.css"
-import { CartContext } from '../../context';
+import { CartContext, LoginContext } from '../../context';
 
 const Products = () => {
   const [items, setItems] = useState([]);
   const { cart } = useContext(CartContext);
-  useEffect(() => {
-    console.log("Initializing Products component...");
-    
-    const fetchItems = async () => {
-      try {
-        const collectionRef = collection(db, 'products');
-        const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-          const fetchedItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          setItems(fetchedItems);
-        });
-        
-        return () => unsubscribe();
-      } catch (error) {
-        console.error("Error fetching items from Firestore:", error);
-      }
-    };
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 
-    fetchItems();
-    console.log("Products component initialized.");
-  }, []);
+  useEffect(() => {
+  console.log("Initializing Products component...");
+  
+  const fetchItems = async () => {
+    try {
+      const collectionRef = collection(db, 'products');
+      const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
+        const fetchedItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log("Fetched items:", fetchedItems);
+        setItems(fetchedItems);
+      });
+      
+      return () => unsubscribe();
+    } catch (error) {
+      console.error("Error fetching items from Firestore:", error);
+    }
+  };
+
+  fetchItems();
+  console.log("Products component initialized.");
+}, []);
+
 
 
   const handleAddtoCart = (item) => {
@@ -47,7 +51,8 @@ const Products = () => {
               <p className="product-name">{item.name}</p>
               <p className="product-price"> ₹ {item.price}</p>
             </div>
-            <button className='add-to-cart-button' onClick={()=> handleAddtoCart(item)}> Add to Cart</button>
+            <button className='add-to-cart-button' onClick={() => { 
+              isLoggedIn? handleAddtoCart(item) : alert("Please sign in to add products to your cart !")}}> Add to Cart</button>
           </div>
         ))}
       </div>

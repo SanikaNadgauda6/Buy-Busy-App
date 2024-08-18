@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { db } from './firebaseInit';
 import { addDoc, collection, deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export const LoginContext = createContext();
 
@@ -20,12 +20,31 @@ export const LoginProvider = ({ children }) => {
       toast.success("Login Successful");
     }
   }, [isLoggedIn]);
+  const [user, setUser] = useState(null);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setIsLoggedIn(true);
+        setUser(currentUser);
+      } else {
+        setIsLoggedIn(false);
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
 
   return (
-    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn, user }}>
       {children}
     </LoginContext.Provider>
   );
+
+  
 };
 
 export const CartContext = createContext();
@@ -37,7 +56,7 @@ export const CartProvider = ({children}) => {
   // Function to add item to cart and Firestore under the user's ID
   const cart = async (item) => {
     const user = auth.currentUser;
-    if (!user) return; // Ensure there's a logged-in user
+    if (!user) return; 
 
     const isInCart = cartItems.find((i) => i.id === item.id);
     const userCartRef = doc(db, 'users', user.uid, 'cart', item.id);

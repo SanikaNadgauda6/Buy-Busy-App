@@ -1,23 +1,49 @@
 import React, { useContext, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import "./auth.css";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../../context';
+import { doc, Firestore, getFirestore, setDoc } from 'firebase/firestore';
+
+
 
 const Auth = () => {
     const auth = getAuth();
+    const firestore = getFirestore(); // Initialize Firestore
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
     const [error, setError] = useState(null); 
+    const user = getAuth().currentUser;
 
     const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
     const navigate = useNavigate();    
+
+
     const handleSignUp = async () => {
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
             console.log('User signed up successfully!');
+
+            await setDoc(doc(firestore, 'users', user.uid), {
+                username: username,
+                email: email
+            });
+            
+            setUsername(username);
             setEmail(email);
             setIsLoggedIn(true);
+
+            await updateProfile(user, { displayName: username }); 
+
+            setDoc(doc(Firestore, 'users', user.uid), {
+                username: username,
+                email: email
+            });
+
         } catch (error) {
             setError(error.message);
         }
@@ -26,8 +52,9 @@ const Auth = () => {
     const handleSignIn = async () => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            console.log('User signed in successfully!');
+            console.log('User signed in successfully! from auth page', username);
             setIsLoggedIn(true);
+            navigate('/');
         } catch (error) {
             setError(error.message);
         }
@@ -50,10 +77,11 @@ const Auth = () => {
             <div className="register-signin-container">
                 {isLoggedIn? (<>
                     <Link to="/"> <button>View Products</button></Link>
-                    <button onClick={handleSignOut}>SignOut</button>                    
+                    <button onClick={handleSignOut}>Sign Out</button>                    
                     </>):
                     (<>
-                        <h2>Register / Sign-In</h2>
+                    <h2>Register / Sign-In</h2>
+                        <input type='text' placeholder='Name' onChange={(e) => setUsername(e.target.value)} />
                         <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                         <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         <button onClick={handleSignUp}>Sign Up</button>

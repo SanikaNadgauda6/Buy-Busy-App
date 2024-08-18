@@ -9,7 +9,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <>
+  
     <ToastContainer
       position="top-right"
       autoClose={1500}
@@ -21,7 +23,8 @@ root.render(
       draggable
       pauseOnHover
       theme="dark"
-    />
+      />
     <App />
-  </React.StrictMode>
+      </>
+  // </React.StrictMode>
 );
