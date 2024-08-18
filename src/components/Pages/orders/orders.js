@@ -31,7 +31,7 @@ export const Orders = () => {
   };
 
     fetchOrders();
-  }, []);
+  }, [auth.currentUser, orders]);
 
   const formatTimestamp = (timestamp) => {
   if (!timestamp || !timestamp.seconds) return 'N/A'; 

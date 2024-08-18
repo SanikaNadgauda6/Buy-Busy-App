@@ -30,7 +30,7 @@ export const Cart = () => {
     
 
     fetchCartItems();
-  }, []);
+  }, [auth.currentUser, setCartItems]);
 
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 1);
