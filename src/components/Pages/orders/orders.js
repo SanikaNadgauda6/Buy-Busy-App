@@ -8,6 +8,7 @@ export const Orders = () => {
   const [orders, setOrders] = useState([]);
   const auth = getAuth();
 
+  useEffect(() => {
   const fetchOrders = async () => {
     const user = auth.currentUser;
     if (!user) return;
@@ -29,9 +30,8 @@ export const Orders = () => {
     }
   };
 
-  useEffect(() => {
     fetchOrders();
-  }, [fetchOrders]);
+  }, []);
 
   const formatTimestamp = (timestamp) => {
   if (!timestamp || !timestamp.seconds) return 'N/A'; 

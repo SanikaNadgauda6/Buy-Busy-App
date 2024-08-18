@@ -9,10 +9,10 @@ export const Cart = () => {
   const { cartItems, setCartItems, removeFromCart, checkout } = useContext(CartContext);
   const auth = getAuth();
   
-  // Function to fetch cart items from Firestore specific to the user
-  const fetchCartItems = async () => {
+  useEffect(() => {
+    const fetchCartItems = async () => {
     const user = auth.currentUser;
-    if (!user) return; // Ensure there's a logged-in user
+    if (!user) return; 
 
     try {
       const cartItemsCollection = collection(db, 'users', user.uid, 'cart');
@@ -26,11 +26,11 @@ export const Cart = () => {
     } catch (error) {
       console.error('Error fetching cart items:', error);
     }
-  };
+    };
+    
 
-  useEffect(() => {
     fetchCartItems();
-  }, [fetchCartItems]);
+  }, []);
 
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 1);
