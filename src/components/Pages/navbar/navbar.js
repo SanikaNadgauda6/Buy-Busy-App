@@ -1,17 +1,16 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "./navbar.css"
-import { useContext } from "react";
-import { LoginContext } from "../../../context";
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStore } from '@fortawesome/free-solid-svg-icons'; 
+import { useSelector } from "react-redux";
+import { authSelector } from "../../auth/authSlice";
 
 
 
 export const Navbar = () => {
 
-  const { isLoggedIn, user } = useContext(LoginContext);
-  console.log("logedin?", isLoggedIn);
+    const { isAuthenticated, user } = useSelector(authSelector);
 
 
   return (
@@ -25,7 +24,7 @@ export const Navbar = () => {
         <NavLink className="nav-link" activeClassName="active" to="/">
           Home
         </NavLink>
-        {isLoggedIn && (
+        {isAuthenticated && (
           <>
             <NavLink className="nav-link" activeClassName="active" to="/cart">
               Cart
@@ -36,7 +35,7 @@ export const Navbar = () => {
           </>
           )}
           
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <>            
             <NavLink className="nav-link" activeClassName="active" to="/Sign-in-Signup">
             Sign Out

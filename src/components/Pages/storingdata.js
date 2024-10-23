@@ -24,7 +24,6 @@ export const initializeFirestoreDataIfNeeded = async () => {
           console.error(`Error adding item ${item.id}:`, error.message);
         }
       }));
-      
       console.log("Firestore data initialized successfully.");
     } else {
       console.log("Firestore data already initialized.");

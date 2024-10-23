@@ -46,22 +46,6 @@
   color: #162348;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-/* 
-.register-signin-container button:first-of-type {
-  background-color: #1d1f50;
-}
-
-.register-signin-container button:last-of-type {
-  background-color: #fbcd15;
-}
-
-.register-signin-container button:first-of-type:hover {
-  background-color: #162348;
-}
-
-.register-signin-container button:last-of-type:hover {
-  background-color: #f2a600;
-} */
 
 .register-signin-container p {
   color: #dc3545;

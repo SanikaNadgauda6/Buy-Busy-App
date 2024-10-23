@@ -1,70 +1,41 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import "./cart.css";
-import { CartContext } from '../../../context';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../../firebaseInit';
-import { getAuth } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartSelector, checkoutOrders, decreaseQuantity, getCartItems, increaseQuantity, removeItem} from './cartSlice';
 
 export const Cart = () => {
-  const { cartItems, setCartItems, removeFromCart, checkout } = useContext(CartContext);
-  const auth = getAuth();
-  
+  const dispatch = useDispatch();
+  // selector for cart items
+  const cartItems = useSelector(cartSelector);
+
   useEffect(() => {
-    const fetchCartItems = async () => {
-    const user = auth.currentUser;
-    if (!user) return; 
+      dispatch(getCartItems());
+  }, [dispatch]);
 
-    try {
-      const cartItemsCollection = collection(db, 'users', user.uid, 'cart');
-      const querySnapshot = await getDocs(cartItemsCollection);
-      const fetchedCartItems = querySnapshot.docs.map(doc => {
-        const data = doc.data();
-        const quantity = data.quantity && data.quantity > 0 ? data.quantity : 1;
-        return { id: doc.id, ...data, quantity: quantity };
-      });
-      setCartItems(fetchedCartItems);
-    } catch (error) {
-      console.error('Error fetching cart items:', error);
-    }
-    };
-    
 
-    fetchCartItems();
-  }, [auth.currentUser, setCartItems]);
-
+//calculate the total price
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 1);
   };
 
+  //dispatch the increase quantity with the item id
   const handleIncreaseQuantity = (id) => {
-    const updatedItems = cartItems.map(item =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    setCartItems(updatedItems);
+    dispatch(increaseQuantity(id));
   };
 
-  const handleDecreaseQuantity = (id) => {
-    const updatedItems = cartItems.map(item => {
-      if (item.id === id) {
-        if (item.quantity > 1) {
-          return { ...item, quantity: item.quantity - 1 };
-        } else {
-          handleRemoveFromCart(id);
-          return null;
-        }
-      }
-      return item;
-    });
-    setCartItems(updatedItems.filter(item => item !== null));
-  };
+  //dispatch the decrease quantity with the item id
+  const handleDecreaseQuantity = (itemId) => {
+    dispatch(decreaseQuantity(itemId));
+  }
 
+  //dispatch the remove Item from cart with the item id
   const handleRemoveFromCart = (itemId) => {
-    removeFromCart(itemId);
+    dispatch(removeItem(itemId));
   };
 
+  //added here the dispatch function
   const handleCheckout = () => {
-    checkout(cartItems);
-    cartItems.forEach((item) => removeFromCart(item.id));
+    dispatch(checkoutOrders(cartItems)); 
   };
 
   return (
@@ -99,7 +70,7 @@ export const Cart = () => {
                       </td>
                       <td className="total-price">Rs. {item.price * item.quantity}</td>
                       <td className="remove-btnC">
-                        <button onClick={() => removeFromCart(item.id)} className="remove-btn">Remove</button>
+                        <button onClick={() => handleRemoveFromCart(item.id)} className="remove-btn">Remove</button>
                       </td>
                     </tr>
                   ))}
